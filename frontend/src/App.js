@@ -1,10 +1,10 @@
-
+import Login from "./component/Login";
 
 function App() {
   return (
-    <div className="App">
-     HI THIS IS HABITUAL
-    </div>
+   <>
+        <Login/>
+   </>
   );
 }
 
