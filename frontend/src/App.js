@@ -1,10 +1,11 @@
-
+import Login from "./component/Login";
+import EntryPage from "./component/entry/EntryPage";
 
 function App() {
   return (
-    <div className="App">
-     HI THIS IS HABITUAL
-    </div>
+   <>
+        <EntryPage/>
+   </>
   );
 }
 
