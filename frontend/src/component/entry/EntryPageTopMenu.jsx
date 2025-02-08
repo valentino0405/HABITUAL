@@ -1,7 +1,6 @@
 import { AppBar, styled, Toolbar, Typography, Button, Box } from "@mui/material";
-
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
-
+import { Link } from "react-router-dom";
 
 const TopNav = styled(AppBar)`
   box-shadow: none;
@@ -24,19 +23,18 @@ const Buttons = styled(Box)`
   display: flex;
   align-items: center;
   gap: 10px;
-  
 `;
 
 const SignButton = styled(Button)`
-    background: #000000;
-    width: 7vw;
-    border-radius: 20px;
+  background: #000000;
+  width: 7vw;
+  border-radius: 20px;
 `;
 
 const LoginButton = styled(Button)`
-    color: #000000;
-    width: 7vw;
-    border-radius: 20px;
+  color: #000000;
+  width: 7vw;
+  border-radius: 20px;
 `;
 
 const EntryPageTopMenu = () => {
@@ -54,8 +52,12 @@ const EntryPageTopMenu = () => {
         </Text>
 
         <Buttons>
-          <LoginButton variant="text" startIcon={<LoginOutlinedIcon />}>Login</LoginButton>
-          <SignButton variant="contained">Sign Up</SignButton>
+          <Link to="/login" style={{ textDecoration: "none" }}>
+            <LoginButton variant="text" startIcon={<LoginOutlinedIcon />}>Login</LoginButton>
+          </Link>
+          <Link to="/signup" style={{ textDecoration: "none" }}>
+            <SignButton variant="contained">Sign Up</SignButton>
+          </Link>
         </Buttons>
 
       </Toolbar>
