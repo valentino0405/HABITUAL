@@ -4,6 +4,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import MailIcon from '@mui/icons-material/Mail';
 import HttpsIcon from '@mui/icons-material/Https';
+import { Link } from 'react-router-dom';
 
 const Container = styled(Box)`
     width: 60vw;
@@ -15,6 +16,7 @@ const Container = styled(Box)`
     overflow: hidden;
 `;
 
+//SignUp Right
 const LeftContainer = styled(Box)`
     flex: 1.5;
     background: white;
@@ -25,6 +27,7 @@ const LeftContainer = styled(Box)`
     padding: 30px;
 `;
 
+//SignUp Left
 const RightContainer = styled(Box)`
     flex: 1;
     background: linear-gradient(to right, #141E30, #243B55);
@@ -56,7 +59,7 @@ const StyledButton = styled(Button)`
 const Login = () => {
     return (
         <Container>
-            {/* LEFT SIDE (Login Form) */}
+            {/* LEFT SIDE (SignUp Form) */}
             <LeftContainer>
                 <Typography variant="h4" fontWeight="bold">Sign in</Typography>
                 <SocialIconsContainer>
@@ -102,16 +105,18 @@ const Login = () => {
                 </FormControl>
 
                 <Typography variant="body2" sx={{ mt: 2, cursor: 'pointer', color: 'gray' }}>Forgot your password?</Typography>
-                <StyledButton variant="contained" color="primary" sx={{ background: "black", color: "white",width:'30%' ,borderRadius:'30px'}}>Sign In</StyledButton>
+                <StyledButton variant="contained" color="primary" sx={{ background: "black", color: "white",width:'10vw' ,borderRadius:'30px'}}>Sign In</StyledButton>
             </LeftContainer>
 
-            {/* RIGHT SIDE (Welcome Message with Gradient Background) */}
+            {/* RIGHT SIDE (Welcome Message with Gradient Background In SignUp) */}
             <RightContainer>
                 <Typography variant="h4" fontWeight="bold">Hello, Friend!</Typography>
                 <Typography variant="body1" textAlign="center">
                     Enter your personal details and<br/> start your journey with us
                 </Typography>
-                <StyledButton variant="outlined" sx={{ borderColor: "white", color: "white",width:'50%' }}>Sign Up</StyledButton>
+                <Link to="/signup" style={{ textDecoration: 'none' }}>
+                    <StyledButton variant="outlined" sx={{ borderColor: "white", color: "white", width: '10vw' }}>Sign Up</StyledButton>
+                </Link>
             </RightContainer>
         </Container>
     );
