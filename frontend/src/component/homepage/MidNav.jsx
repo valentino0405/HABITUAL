@@ -1,4 +1,5 @@
 import { Box, Typography, styled } from "@mui/material";
+import { Link } from "react-router-dom";
 
 // Styled Components for Layout
 const MainBox = styled(Box)`
@@ -34,7 +35,11 @@ const Tile = styled(Box)`
   }
 `;
 
-// Wrapper for Tile Grid
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
 const TileGrid = styled(Box)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -44,15 +49,14 @@ const TileGrid = styled(Box)`
 `;
 
 const MidNav = () => {
-  // Navigation Items
   const sections = [
-    "User Profile",
-    "Leaderboard",
-    "Chatbot",
-    "Dashboard",
-    "E-commerce",
-    "Doctor Appointment",
-    "Habit (Journal + Routine)",
+    { name: "User Profile", path: "/userpro" },
+    { name: "Leaderboard", path: "/leaderboard" },
+    { name: "Chatbot", path: "/chatbot" },
+    { name: "Dashboard", path: "/dashboard" },
+    { name: "E-commerce", path: "/ecommerce" },
+    { name: "Doctor Appointment", path: "/doctorappor" },
+    { name: "Habit (Journal + Routine)", path: "/habitjr" },
   ];
 
   return (
@@ -62,7 +66,9 @@ const MidNav = () => {
       </Typography>
       <TileGrid>
         {sections.map((section, index) => (
-          <Tile key={index}>{section}</Tile>
+          <StyledLink key={index} to={section.path}>
+            <Tile>{section.name}</Tile>
+          </StyledLink>
         ))}
       </TileGrid>
     </MainBox>

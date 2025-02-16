@@ -54,6 +54,11 @@ const StyledButton = styled(Button)`
     margin-top: 10px;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
 
 
 const Login = () => {
@@ -105,7 +110,10 @@ const Login = () => {
                 </FormControl>
 
                 <Typography variant="body2" sx={{ mt: 2, cursor: 'pointer', color: 'gray' }}>Forgot your password?</Typography>
-                <StyledButton variant="contained" color="primary" sx={{ background: "black", color: "white",width:'10vw' ,borderRadius:'30px'}}>Sign In</StyledButton>
+                <StyledLink to="/home" >
+                    <StyledButton variant="contained" color="primary" sx={{ background: "black", color: "white",width:'10vw' ,borderRadius:'30px'}}>Sign In</StyledButton>
+                </StyledLink>
+                
             </LeftContainer>
 
             {/* RIGHT SIDE (Welcome Message with Gradient Background In SignUp) */}
@@ -114,9 +122,9 @@ const Login = () => {
                 <Typography variant="body1" textAlign="center">
                     Enter your personal details and<br/> start your journey with us
                 </Typography>
-                <Link to="/signup" style={{ textDecoration: 'none' }}>
+                <StyledLink to="/signup" >
                     <StyledButton variant="outlined" sx={{ borderColor: "white", color: "white", width: '10vw' }}>Sign Up</StyledButton>
-                </Link>
+                </StyledLink>
             </RightContainer>
         </Container>
     );

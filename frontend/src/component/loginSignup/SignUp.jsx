@@ -53,6 +53,11 @@ const StyledButton = styled(Button)`
     margin-top: 10px;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
 const SignUp = () => {
     return (
         <Container>
@@ -122,7 +127,9 @@ const SignUp = () => {
                         }}
                     />
                 </FormControl>
-                <StyledButton variant="contained" color="primary" sx={{ background: "black", color: "white", width: '10vw' }}>Sign Up</StyledButton>
+                <StyledLink to="/home" >
+                    <StyledButton variant="contained" color="primary" sx={{ background: "black", color: "white", width: '10vw' }}>Sign Up</StyledButton>
+                </StyledLink>
             </RightContainer>
         </Container>
     );
