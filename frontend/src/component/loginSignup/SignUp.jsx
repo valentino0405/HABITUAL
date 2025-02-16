@@ -6,6 +6,15 @@ import MailIcon from '@mui/icons-material/Mail';
 import HttpsIcon from '@mui/icons-material/Https';
 import PersonIcon from '@mui/icons-material/Person';
 import { Link } from 'react-router-dom';
+import { useState, useContext } from "react";
+import { authenticateSignup } from "../../service/api";
+
+
+import { DataContext } from '../../context/DataProvider';
+
+
+
+const signupInitialValues = { name: '', email: '', password: '' };
 
 const Container = styled(Box)`
     width: 60vw;
@@ -54,20 +63,37 @@ const StyledButton = styled(Button)`
 `;
 
 const SignUp = () => {
+    const [signup, setSignup] = useState(signupInitialValues);
+    const { setAccount } = useContext(DataContext);
+
+
+    const onInputChange = (e) => {
+        setSignup({ ...signup, [e.target.name]: e.target.value });
+    };
+
+    const signupUser = async () => {
+        let response = await authenticateSignup(signup);
+        if (!response) return;
+    
+        setAccount(signup.name);
+        localStorage.setItem("account", signup.name); // Store in localStorage
+    };
+    
+
     return (
         <Container>
-            {/* LEFT SIDE (Welcome Message) */}
             <LeftContainer>
                 <Typography variant="h4" fontWeight="bold">Welcome Back!</Typography>
                 <Typography variant="body1" textAlign="center">
-                    To keep connected with us please <br/> login with your personal info
+                    To keep connected with us please <br /> login with your personal info
                 </Typography>
                 <Link to="/login" style={{ textDecoration: 'none' }}>
-                    <StyledButton variant="outlined" sx={{ borderColor: "white", color: "white", width: '10vw' }}>Sign In</StyledButton>
+                    <StyledButton variant="outlined" sx={{ borderColor: "white", color: "white", width: '10vw' }}>
+                        Sign In
+                    </StyledButton>
                 </Link>
             </LeftContainer>
 
-            {/* RIGHT SIDE (Sign Up Form) */}
             <RightContainer>
                 <Typography variant="h4" fontWeight="bold">Create Account</Typography>
                 <SocialIconsContainer>
@@ -76,7 +102,7 @@ const SignUp = () => {
                     <LinkedInIcon fontSize="large" />
                 </SocialIconsContainer>
                 <Typography variant="body2" color="gray">or use your email for registration</Typography>
-                
+
                 <FormControl fullWidth>
                     <TextField
                         name="name"
@@ -91,6 +117,9 @@ const SignUp = () => {
                                 </InputAdornment>
                             ),
                         }}
+                        value={signup.name}
+                        onChange={(e) => onInputChange(e)}
+
                     />
                     <TextField
                         name="email"
@@ -105,6 +134,8 @@ const SignUp = () => {
                                 </InputAdornment>
                             ),
                         }}
+                        value={signup.email}
+                        onChange={(e) => onInputChange(e)}
                     />
                     <TextField
                         name="password"
@@ -120,9 +151,22 @@ const SignUp = () => {
                                 </InputAdornment>
                             ),
                         }}
+                        value={signup.password}
+                        onChange={(e) => onInputChange(e)}
                     />
                 </FormControl>
-                <StyledButton variant="contained" color="primary" sx={{ background: "black", color: "white", width: '10vw' }}>Sign Up</StyledButton>
+                <Link to="/home" style={{ textDecoration: "none" }}>
+                    <StyledButton
+                        variant="contained"
+                        color="primary"
+                        sx={{ background: "black", color: "white", width: '10vw' }}
+                        onClick={signupUser}
+                    >
+
+                        Sign Up
+
+                    </StyledButton>
+                </Link>
             </RightContainer>
         </Container>
     );

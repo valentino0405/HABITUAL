@@ -1,133 +1,78 @@
-import { AppBar, Toolbar, Typography, IconButton, Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, styled } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import PersonIcon from "@mui/icons-material/Person";
-import SettingsIcon from "@mui/icons-material/Settings";
+import { Box, List, ListItem, ListItemButton, ListItemIcon, styled } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import LogoutIcon from "@mui/icons-material/Logout";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import PersonIcon from "@mui/icons-material/Person";
 import { useState } from "react";
 
-const drawerWidth = 80;
-
-// Styled Components
-const Sidebar = styled(Drawer)({
-  width: drawerWidth,
-  flexShrink: 0,
-  "& .MuiDrawer-paper": {
-    width: drawerWidth,
-    boxSizing: "border-box",
-    background: "#f8f9fa",
-    paddingTop: "20px",
-  },
-});
-
-const TopNav = styled(AppBar)({
-  background: "#ffffff",
-  boxShadow: "none",
-  padding: "10px",
-});
-
-const MainContainer = styled(Box)({
+const Sidebar = styled(Box)({
+  width: "7vw",
+  height: "contain",
+  background: "#000000",
   display: "flex",
-});
-
-const ToolbarContent = styled(Toolbar)({
-  display: "flex",
-  justifyContent: "space-between",
-});
-
-const IconGroup = styled(Box)({
-  display: "flex",
+  flexDirection: "column",
   alignItems: "center",
-  gap: "15px",
+  paddingTop: "20px",
+ // borderTopLeftRadius: "40px", // Increased curve
+  //borderTopRightRadius: "30px", // Increased curve
+ //borderRadius:"30px"
+ //borderBottomRightRadius:"35px"
 });
+
+const Logo = styled(Box)({
+  width: "40px",
+  height: "40px",
+  background: "#C4FF26",
+  borderRadius: "50%",
+  marginBottom: "15vh",
+});
+
+const StyledListItem = styled(ListItemButton)(({ active }) => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "15px",
+  marginBottom: "3vh",
+  borderRadius: "100px",
+  backgroundColor: active ? "#C4FF26" : "transparent",
+  width: "60px",
+  height: "60px",
+  "&:hover": {
+    backgroundColor: "#C4FF26",
+  },
+}));
 
 const LeftNav = () => {
-  const [open, setOpen] = useState(true);
+  const [active, setActive] = useState("home");
 
   return (
-    <MainContainer>
-      {/* Left Sidebar */}
-      <Sidebar variant="permanent">
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HomeIcon />
+    <Sidebar>
+      <Logo />
+      <List>
+        {[
+          { id: "home", icon: <HomeIcon /> },
+          { id: "stats", icon: <ShowChartIcon /> },
+          { id: "favorites", icon: <FavoriteIcon /> },
+          { id: "calendar", icon: <CalendarTodayIcon /> },
+          { id: "profile", icon: <PersonIcon /> }
+        ].map(({ id, icon }) => (
+          <ListItem key={id} disablePadding>
+            <StyledListItem active={active === id} onClick={() => setActive(id)}>
+              <ListItemIcon sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                minWidth: "unset",
+                color: active === id ? "#000" : "#fff"
+              }}>
+                {icon}
               </ListItemIcon>
-            </ListItemButton>
+            </StyledListItem>
           </ListItem>
-
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <ShowChartIcon />
-              </ListItemIcon>
-            </ListItemButton>
-          </ListItem>
-
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <FavoriteIcon />
-              </ListItemIcon>
-            </ListItemButton>
-          </ListItem>
-
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-            </ListItemButton>
-          </ListItem>
-
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <SettingsIcon />
-              </ListItemIcon>
-            </ListItemButton>
-          </ListItem>
-
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <LogoutIcon />
-              </ListItemIcon>
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </Sidebar>
-
-      {/* Main Content Area */}
-      <Box flexGrow={1}>
-        {/* Top Navigation Bar */}
-        <TopNav position="static">
-          <ToolbarContent>
-            {/* Left - Menu Icon */}
-            <IconButton edge="start" color="inherit">
-              <MenuIcon />
-            </IconButton>
-
-            {/* Right - Profile & Notifications */}
-            <IconGroup>
-              <IconButton color="inherit">
-                <NotificationsIcon />
-              </IconButton>
-              <IconButton color="inherit">
-                <PersonIcon />
-              </IconButton>
-              <IconButton color="inherit">
-                <SettingsIcon />
-              </IconButton>
-            </IconGroup>
-          </ToolbarContent>
-        </TopNav>
-      </Box>
-    </MainContainer>
+        ))}
+      </List>
+    </Sidebar>
   );
 };
 
