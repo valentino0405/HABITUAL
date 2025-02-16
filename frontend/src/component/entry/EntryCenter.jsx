@@ -1,11 +1,17 @@
 import { styled, Typography, Box, Button } from "@mui/material";
 import { FitnessCenter, LocalDrink, Restaurant, Hotel, SelfImprovement } from "@mui/icons-material";
 import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
+import { Link } from "react-router-dom";
 
 // Container for all content
 const CenterText = styled(Box)`
   text-align: center;
   margin-top: 15vh;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `;
 
 // Styled 'Get Started' Button
@@ -62,9 +68,12 @@ const EntryCenter = () => {
       </IconStrip>
 
       {/* Get Started Button */}
-      <GetStarted variant="contained" endIcon={<EastOutlinedIcon />}>
-        Get Started
-      </GetStarted>
+      <StyledLink to="/signup" >
+        <GetStarted variant="contained" endIcon={<EastOutlinedIcon />}>
+          Get Started
+        </GetStarted>
+      </StyledLink>
+      
     </CenterText>
   );
 };
